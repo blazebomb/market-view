@@ -45,7 +45,7 @@ export default function StockDashboard({ companies }: Props) {
       {
         label: 'Close Price',
         data: dataPoints.map((d) => d.close),
-        borderColor: '#f97316', // orange-500
+        borderColor: '#f97316', 
         backgroundColor: 'rgba(249, 115, 22, 0.1)',
         tension: 0.1,
         borderWidth: 2,
