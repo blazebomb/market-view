@@ -1,16 +1,20 @@
-import { dirname } from "path";
-import { fileURLToPath } from "url";
-import { FlatCompat } from "@eslint/eslintrc";
+// app/page.tsx
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
+import { prisma } from './lib/prisma';
 
-const compat = new FlatCompat({
-  baseDirectory: __dirname,
-});
+export default async function Home() {
+  const companies = await prisma.company.findMany();
 
-const eslintConfig = [
-  ...compat.extends("next/core-web-vitals", "next/typescript"),
-];
-
-export default eslintConfig;
+  return (
+    <div>
+      <h1>Stock Companies</h1>
+      <ul>
+        {companies.map((company) => (
+          <li key={company.id}>
+            {company.name} ({company.ticker})
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+}
