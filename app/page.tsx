@@ -1,5 +1,6 @@
 import { prisma } from '@/lib/prisma';
 import StockDashboard from '@/component/Dashboard';
+import { Suspense } from 'react';
 
 export default async function Home() {
   const companies = await prisma.company.findMany({
@@ -20,8 +21,8 @@ export default async function Home() {
   }));
 
   return (
-    <div>
+    <Suspense fallback={<div>Loading...</div>}>
       <StockDashboard companies={formattedCompanies} />
-    </div>
+    </Suspense>
   );
 }
